@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/NC_Construction/static/css/main.07850c41.css",
+    "main.js": "/NC_Construction/static/js/main.a2ef480c.js",
+    "static/js/787.633816a4.chunk.js": "/NC_Construction/static/js/787.633816a4.chunk.js",
+    "static/media/register.jpg": "/NC_Construction/static/media/register.1329d7234b83d6ce9125.jpg",
+    "static/media/login.jpg": "/NC_Construction/static/media/login.94f792cc573690dbed55.jpg",
+    "static/media/vahicle 1.jpg": "/NC_Construction/static/media/vahicle 1.d7c245c83a83aaed09da.jpg",
+    "index.html": "/NC_Construction/index.html",
+    "main.07850c41.css.map": "/NC_Construction/static/css/main.07850c41.css.map",
+    "main.a2ef480c.js.map": "/NC_Construction/static/js/main.a2ef480c.js.map",
+    "787.633816a4.chunk.js.map": "/NC_Construction/static/js/787.633816a4.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.07850c41.css",
+    "static/js/main.a2ef480c.js"
+  ]
+}
