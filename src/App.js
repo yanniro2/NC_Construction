@@ -5,7 +5,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import HomePage from "./Pages/HomePage";
 import Customer from "./Pages/CustomerPage";
 import Employee from "./Pages/EmployeePage";
-import Logistics from "./Pages/Logistics";
+import Logistics from "./Pages/LogisticsPage";
 import Payment from "./Pages/Payment";
 import Reciept from "./Pages/Reciept";
 import Stock from "./Pages/StockPage"
