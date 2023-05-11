@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 
-function EditTask({ open, onClose, toEditTitle, toEditDescription, id })
+function EditCustomer({ open, onClose, toEditTitle, toEditDescription, id })
 {
 
   const [title, setTitle] = useState(toEditTitle)
@@ -14,7 +14,7 @@ function EditTask({ open, onClose, toEditTitle, toEditDescription, id })
   const handleUpdate = async (e) =>
   {
     e.preventDefault()
-    const taskDocRef = doc(db, 'tasks', id)
+    const taskDocRef = doc(db, 'customer', id)
     try {
       await updateDoc(taskDocRef, {
         title: title,
@@ -26,8 +26,8 @@ function EditTask({ open, onClose, toEditTitle, toEditDescription, id })
     }
   }
   return (
-    <Modal modalLable='Edit Task' onClose={onClose} open={open}>
-      <form className='editTask' name='updateTask' onSubmit={handleUpdate}>
+    <Modal modalLable='Customer' onClose={onClose} open={open}>
+      <form className='editTask' name='updateCustomer' onSubmit={handleUpdate}>
         <input
           type='text'
           name='title'
@@ -40,4 +40,4 @@ function EditTask({ open, onClose, toEditTitle, toEditDescription, id })
   )
 }
 
-export default EditTask
+export default EditCustomer

@@ -5,7 +5,7 @@ import { useState } from 'react'
 // import './addTask.css'
 
 
-function AddTask({ onClose, open })
+function AddCustomer({ onClose, open })
 {
 
   const [title, setTitle] = useState('')
@@ -16,7 +16,7 @@ function AddTask({ onClose, open })
   {
     e.preventDefault()
     try {
-      await addDoc(collection(db, 'tasks'), {
+      await addDoc(collection(db, 'customer'), {
         title: title,
         description: description,
         completed: false,
@@ -29,7 +29,7 @@ function AddTask({ onClose, open })
   }
   return (
     <div className='w-full h-full py-[6rem] px-5'>
-      <Modal modalLable='Add Task' onClose={onClose} open={open}>
+      <Modal modalLable='Add Customer' onClose={onClose} open={open}>
         <form className='addTask' name='addTask' onSubmit={handleSubmit}>
           <input
             type='text'
@@ -39,7 +39,7 @@ function AddTask({ onClose, open })
             placeholder='Enter title' />
           <textarea
             onChange={(e) => setDescription(e.target.value)}
-            placeholder='Enter task decription'
+            placeholder='Enter Customer decription'
             value={description}></textarea>
           <button type='submit'>Done</button>
         </form>
@@ -48,4 +48,4 @@ function AddTask({ onClose, open })
   )
 }
 
-export default AddTask
+export default AddCustomer

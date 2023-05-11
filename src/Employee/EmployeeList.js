@@ -1,12 +1,12 @@
 import Modal from "./Modal"
 // import './taskItem.css'
 
-function TaskItem({ onClose, open, title, description })
+function CustomerList({ onClose, open, title, description })
 {
 
   return (
     <div className='w-full h-full py-[6rem] px-5'>
-      <Modal modalLable='Task Item' onClose={onClose} open={open}>
+      <Modal modalLable='Customer List' onClose={onClose} open={open}>
         <div className='taskItem'>
           <h2>{title}</h2>
           <p>{description}</p>
@@ -16,4 +16,4 @@ function TaskItem({ onClose, open, title, description })
   )
 }
 
-export default TaskItem
+export default CustomerList

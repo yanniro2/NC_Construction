@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import TaskItem from '../Task/TaskItem'
-import EditTask from '../Task/EditTask'
+import CustomerList from '../Customer/CustomerList'
+import EditCustomer from '../Customer/EditCustomer'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 // import "./task.css"
-function Task({ id, title, description, completed })
+function Customer({ id, title, description, completed })
 {
 
     const [checked, setChecked] = useState(completed)
@@ -18,7 +18,7 @@ function Task({ id, title, description, completed })
     /* function to update document in firestore */
     const handleCheckedChange = async () =>
     {
-        const taskDocRef = doc(db, 'tasks', id)
+        const taskDocRef = doc(db, 'customer', id)
         try {
             await updateDoc(taskDocRef, {
                 completed: checked
@@ -30,7 +30,7 @@ function Task({ id, title, description, completed })
     /* function to delete a document from firstore */
     const handleDelete = async () =>
     {
-        const taskDocRef = doc(db, 'tasks', id)
+        const taskDocRef = doc(db, 'customer', id)
         try {
             await deleteDoc(taskDocRef)
         } catch (err) {
@@ -74,7 +74,7 @@ function Task({ id, title, description, completed })
                 </div>
 
                 {open.view &&
-                    <TaskItem
+                    <CustomerList
                         onClose={handleClose}
                         title={title}
                         description={description}
@@ -82,7 +82,7 @@ function Task({ id, title, description, completed })
                 }
 
                 {open.edit &&
-                    <EditTask
+                    <EditCustomer
                         onClose={handleClose}
                         toEditTitle={title}
                         toEditDescription={description}
@@ -95,4 +95,4 @@ function Task({ id, title, description, completed })
     )
 }
 
-export default Task
+export default Customer
