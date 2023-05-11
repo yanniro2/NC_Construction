@@ -8,7 +8,7 @@ import Employee from "./Pages/EmployeePage";
 import Logistics from "./Pages/Logistics";
 import Payment from "./Pages/Payment";
 import Reciept from "./Pages/Reciept";
-import Stock from "./Pages/Stocks"
+import Stock from "./Pages/StockPage"
 import Task from "./Pages/TaskManager"
 const App = () =>
 {

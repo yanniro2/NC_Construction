@@ -4,7 +4,7 @@ import EditEmployee from '../Employee/EditEmployee'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
-function Employee({ id, ename, email, completed, eaddress, eid, emobile })
+function Stocks({ id, ename, email, completed, eaddress, eid, emobile })
 {
 
     const [checked, setChecked] = useState(completed)
@@ -18,7 +18,7 @@ function Employee({ id, ename, email, completed, eaddress, eid, emobile })
     /* function to update document in firestore */
     const handleCheckedChange = async () =>
     {
-        const taskDocRef = doc(db, 'employee', id)
+        const taskDocRef = doc(db, 'stocks', id)
         try {
             await updateDoc(taskDocRef, {
                 completed: checked
@@ -115,4 +115,4 @@ function Employee({ id, ename, email, completed, eaddress, eid, emobile })
     )
 }
 
-export default Employee
+export default Stocks

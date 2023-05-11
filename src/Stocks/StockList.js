@@ -1,6 +1,6 @@
 import Modal from "./Modal"
 
-function EmployeeList({ onClose, open, ename, eaddress, email, eid, emobile })
+function StockList({ onClose, open, ename, eaddress, email, eid, emobile })
 {
 
   return (
@@ -47,4 +47,4 @@ function EmployeeList({ onClose, open, ename, eaddress, email, eid, emobile })
   )
 }
 
-export default EmployeeList
+export default StockList

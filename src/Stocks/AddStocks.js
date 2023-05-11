@@ -5,7 +5,7 @@ import { useState } from 'react'
 
 
 
-function AddCustomer({ onClose, open })
+function AddStocks({ onClose, open })
 {
   const [ename, setEname] = useState('')
   const [email, setEmail] = useState('')
@@ -88,4 +88,4 @@ function AddCustomer({ onClose, open })
   )
 }
 
-export default AddCustomer
+export default AddStocks

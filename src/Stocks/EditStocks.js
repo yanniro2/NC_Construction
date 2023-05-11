@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 
-function EditEmployee({ open, onClose, toEditname, toEditemail, id, toEditaddress, toEditemobile, toEditeEid })
+function EditStocks({ open, onClose, toEditname, toEditemail, id, toEditaddress, toEditemobile, toEditeEid })
 {
 
   const [ename, setEname] = useState(toEditname)
@@ -16,7 +16,7 @@ function EditEmployee({ open, onClose, toEditname, toEditemail, id, toEditaddres
   const handleUpdate = async (e) =>
   {
     e.preventDefault()
-    const taskDocRef = doc(db, 'employee', id)
+    const taskDocRef = doc(db, 'stocks', id)
     try {
       await updateDoc(taskDocRef, {
         ename: ename,
@@ -80,4 +80,4 @@ function EditEmployee({ open, onClose, toEditname, toEditemail, id, toEditaddres
   )
 }
 
-export default EditEmployee
+export default EditStocks
