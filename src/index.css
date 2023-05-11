@@ -21,4 +21,8 @@
     .form {
         @apply flex flex-col w-full h-full gap-3 justify-center;
     }
+
+    .label {
+        @apply text-[1.2rem] font-xl capitalize;
+    }
 }

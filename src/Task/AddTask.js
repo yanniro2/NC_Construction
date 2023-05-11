@@ -2,7 +2,7 @@ import { db } from '../firebase'
 import { collection, addDoc, Timestamp } from 'firebase/firestore'
 import Modal from "./Modal"
 import { useState } from 'react'
-// import './addTask.css'
+import './addTask.css'
 
 
 function AddTask({ onClose, open })

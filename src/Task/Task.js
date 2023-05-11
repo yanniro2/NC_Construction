@@ -3,7 +3,7 @@ import TaskItem from '../Task/TaskItem'
 import EditTask from '../Task/EditTask'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
-// import "./task.css"
+import "./task.css"
 function Task({ id, title, description, completed })
 {
 

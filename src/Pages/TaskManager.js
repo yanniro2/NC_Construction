@@ -1,6 +1,6 @@
 // JavaScript
 // src/TaskManager.js
-// import './taskManager.css'
+import './taskManager.css'
 import Task from '../Task/Task'
 import AddTask from '../Task/AddTask'
 import { useState, useEffect } from 'react'
@@ -26,8 +26,8 @@ function TaskManager()
     }, [])
 
     return (
-        <div className='taskManager'>
-            <header>Task Manager</header>
+        <div className='w-full h-full py-[6rem] px-5'>
+
             <div className='taskManager__container'>
                 <button
                     onClick={() => setOpenAddModal(true)}>
