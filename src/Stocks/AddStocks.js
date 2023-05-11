@@ -7,11 +7,8 @@ import { useState } from 'react'
 
 function AddStocks({ onClose, open })
 {
-  const [ename, setEname] = useState('')
-  const [email, setEmail] = useState('')
-  const [eaddress, setAddress] = useState('');
-  const [eid, setId] = useState('');
-  const [emobile, setMoile] = useState('');
+  const [item, setItem] = useState('')
+  const [icode, setIcode] = useState('')
 
 
   /* function to add new task to firestore */
@@ -19,12 +16,9 @@ function AddStocks({ onClose, open })
   {
     e.preventDefault()
     try {
-      await addDoc(collection(db, 'employee'), {
-        ename: ename,
-        email: email,
-        eaddress: eaddress,
-        eid: eid,
-        emobile: emobile,
+      await addDoc(collection(db, 'stocks'), {
+        item: item,
+        icode: icode,
         completed: false,
         created: Timestamp.now()
       })
@@ -35,46 +29,22 @@ function AddStocks({ onClose, open })
   }
   return (
     <div className='w-full h-full pt-[10rem] px-5 fixed z-[1000] top-0 left-0 right-0 bottom-0  backdrop-blur-md py-5 flex items-center justify-center '>
-      <Modal modalLable='Add Employee' onClose={onClose} open={open}>
+      <Modal modalLable='Add Stock' onClose={onClose} open={open}>
         <form name='addTask' onSubmit={handleSubmit} className="form ">
           <input
             type='text'
-            name='ename'
-            onChange={(e) => setEname(e.target.value)}
-            value={ename}
-            placeholder='Enter Name'
-            className='input' />
-          <input
-            type="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder='Enter Email'
-            value={email}
+            name='item'
+            onChange={(e) => setItem(e.target.value)}
+            value={item}
+            placeholder='Enter Items'
             className='input' />
 
           <input
             type="text"
-            name="eaddress"
-            onChange={(e) => setAddress(e.target.value)}
-            placeholder='Enter Address'
-            value={eaddress}
-            className='input' />
-
-          <input
-            type="text"
-            name="eid"
-            onChange={(e) => setId(e.target.value)}
-            placeholder='Enter Employee ID'
-            value={eid}
-            className='input' />
-
-
-          <input
-            type="text"
-            name="emobile"
-            onChange={(e) => setMoile(e.target.value)}
-            placeholder='Enter Mobile no'
-            value={emobile}
+            name="icode"
+            onChange={(e) => setIcode(e.target.value)}
+            placeholder='Enter Item Code'
+            value={icode}
             className='input' />
 
           <div className='flex items-center justify-center gap-6'>

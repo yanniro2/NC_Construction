@@ -1,10 +1,10 @@
 import { useState } from 'react'
-import EmployeeList from '../Employee/EmployeeList'
-import EditEmployee from '../Employee/EditEmployee'
+import StockList from '../Stocks/StockList'
+import EditStocks from '../Stocks/EditStocks'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
-function Stocks({ id, ename, email, completed, eaddress, eid, emobile })
+function Stocks({ id, item, icode, completed })
 {
 
     const [checked, setChecked] = useState(completed)
@@ -30,7 +30,7 @@ function Stocks({ id, ename, email, completed, eaddress, eid, emobile })
     /* function to delete a document from firstore */
     const handleDelete = async () =>
     {
-        const taskDocRef = doc(db, 'employee', id)
+        const taskDocRef = doc(db, 'stock', id)
         try {
             await deleteDoc(taskDocRef)
         } catch (err) {
@@ -39,7 +39,7 @@ function Stocks({ id, ename, email, completed, eaddress, eid, emobile })
     }
 
     return (
-        <div className=' rounded  shadow-md border-light-blue border-[2px] flex w-[15rem] h-[15rem] '>
+        <div className=' rounded  shadow-md border-light-blue border-[2px] flex w-full'>
             {/* <div className={`task ${checked && 'task--borderColor'}`}> */}
             {/* <div className='w-full h-full'> */}
             {/* <div>
@@ -56,18 +56,16 @@ function Stocks({ id, ename, email, completed, eaddress, eid, emobile })
                         onClick={() => setChecked(!checked)} ></label>
                 </div> */}
             <div className='flex w-full h-full flex-wrap '>
-                <div className='w-full h-full flex flex-col justify-evenly items-center'>
-                    <div>
-                        <RiUser3Fill className='text-[4rem] text-dark-blue' />
-                    </div>
-                    <div>
+                <div className='w-full h-full flex  justify-evenly items-center'>
+
+                    <div className='flex w-1/2 flex-col gap-1' >
                         <p className="text-[1.2rem] font-xl capitalize">
 
-                            Name : {ename}</p>
-                        <p className="text-[1.2rem] font-xl capitalize">Id: {eid}</p>
+                            Name : {item}</p>
+                        <p className="text-[1.2rem] font-xl capitalize">Item Code: {icode}</p>
                     </div>
 
-                    <div className='flex w-full justify-evenly'>
+                    <div className='flex w-1/2  justify-end gap-5 p-2' >
                         <button
                             onClick={() => setOpen({ ...open, view: true })}
                             className='btn-1'>
@@ -84,26 +82,21 @@ function Stocks({ id, ename, email, completed, eaddress, eid, emobile })
             </div>
             {
                 open.view &&
-                <EmployeeList
+                <StockList
                     onClose={handleClose}
-                    ename={ename}
-                    email={email}
+                    item={item}
+                    icode={icode}
                     open={open.view}
-                    eaddress={eaddress}
-                    eid={eid}
-                    emobile={emobile}
+
                 />
             }
 
             {
                 open.edit &&
-                <EditEmployee
+                <EditStocks
                     onClose={handleClose}
-                    toEditname={ename}
-                    toEditemail={email}
-                    toEditaddress={eaddress}
-                    toEditeEid={eid}
-                    toEditemobile={emobile}
+                    toEdititem={item}
+                    toEditicode={icode}
                     open={open.edit}
                     id={id}
 

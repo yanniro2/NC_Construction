@@ -42,8 +42,8 @@ function StockPage()
                             id={task.id}
                             key={task.id}
                             completed={task.data.completed}
-                            ename={task.data.ename}
-                            email={task.data.email}
+                            icode={task.data.icode}
+                            item={task.data.item}
 
 
                         />
