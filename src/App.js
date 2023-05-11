@@ -3,8 +3,13 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import HomePage from "./Pages/HomePage";
-import VehicleDetailsPage from "./Pages/VehicleDetailsPage";
-import CategoryPage from "./Pages/CategoryPage";
+import Customer from "./Pages/Customer";
+import Employee from "./Pages/Employee";
+import Logistics from "./Pages/Logistics";
+import Payment from "./Pages/Payment";
+import Reciept from "./Pages/Reciept";
+import Stock from "./Pages/Stocks"
+
 
 const App = () =>
 {
@@ -21,16 +26,19 @@ const App = () =>
               <Link to="/stocks">Stocks</Link>
             </li>
             <li>
-              <Link to="/aboutus">About us</Link>
+              <Link to="/logistics">Logistics</Link>
             </li>
             <li>
-              <Link to="/contactus">Contact us</Link>
+              <Link to="/payment">Payment</Link>
             </li>
             <li>
-              <Link to="/vehicle-details">Vehicle Details</Link>
+              <Link to="/reciept">Reciept</Link>
             </li>
             <li>
-              <Link to="/category">Category</Link>
+              <Link to="/employee">Employee</Link>
+            </li>
+            <li>
+              <Link to="/customer">Customer</Link>
             </li>
           </ul>
 
@@ -45,9 +53,13 @@ const App = () =>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/vehicle-details" element={<VehicleDetailsPage />} />
-          <Route path="/category" element={<CategoryPage />} />
-          <Route path="/category" element={<CategoryPage />} />
+          <Route path="/stocks" element={<Stock />} />
+          <Route path="/logistics" element={<Logistics />} />
+          <Route path="/payment" element={<Payment />} />
+          <Route path="/reciept" element={<Reciept />} />
+          <Route path="/employee" element={<Employee />} />
+          <Route path="/customer" element={<Customer />} />
+
 
         </Routes>
       </div>
