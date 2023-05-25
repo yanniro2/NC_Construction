@@ -4,12 +4,13 @@ import EditCustomer from '../Customer/EditCustomer'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
+import MakeSure from '../Components/MakeSure';
 function Customer({ id, title, description, completed, cusID, cusNo, cusEmail })
 {
 
     const [checked, setChecked] = useState(completed)
     const [open, setOpen] = useState({ edit: false, view: false })
-
+    const [popup, setPopup] = useState(null);
     const handleClose = () =>
     {
         setOpen({ edit: false, view: false })
@@ -36,6 +37,11 @@ function Customer({ id, title, description, completed, cusID, cusNo, cusEmail })
         } catch (err) {
             alert(err)
         }
+    }
+
+    const handlePopup = () =>
+    {
+        setPopup(!popup)
     }
 
     return (
@@ -81,7 +87,7 @@ function Customer({ id, title, description, completed, cusID, cusNo, cusEmail })
                             onClick={() => setOpen({ ...open, edit: true })}>
                             Edit
                         </button>
-                        <button className='btn-1 bg-yellow text-black' onClick={handleDelete}>Delete</button>
+                        <button className='btn-1 bg-yellow text-black' onClick={handlePopup}>Delete</button>
 
 
 
@@ -116,6 +122,7 @@ function Customer({ id, title, description, completed, cusID, cusNo, cusEmail })
             }
 
             {/* </div > */}
+            {popup && <MakeSure handleDelete={handleDelete} handlePopup={handlePopup} />}
         </div >
     )
 }

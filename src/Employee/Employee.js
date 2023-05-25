@@ -4,11 +4,13 @@ import EditEmployee from '../Employee/EditEmployee'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
+import MakeSure from '../Components/MakeSure';
 function Employee({ id, ename, email, completed, eaddress, eid, emobile })
 {
 
     const [checked, setChecked] = useState(completed)
     const [open, setOpen] = useState({ edit: false, view: false })
+    const [popup, setPopup] = useState(null);
 
     const handleClose = () =>
     {
@@ -36,6 +38,11 @@ function Employee({ id, ename, email, completed, eaddress, eid, emobile })
         } catch (err) {
             alert(err)
         }
+    }
+
+    const handlePopup = () =>
+    {
+        setPopup(!popup)
     }
 
     return (
@@ -78,7 +85,7 @@ function Employee({ id, ename, email, completed, eaddress, eid, emobile })
                             onClick={() => setOpen({ ...open, edit: true })}>
                             Edit
                         </button>
-                        <button className='btn-1 bg-yellow text-black' onClick={handleDelete}>Delete</button>
+                        <button className='btn-1 bg-yellow text-black' onClick={handlePopup}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -111,6 +118,7 @@ function Employee({ id, ename, email, completed, eaddress, eid, emobile })
             }
 
             {/* </div > */}
+            {popup && <MakeSure handleDelete={handleDelete} handlePopup={handlePopup} />}
         </div >
     )
 }

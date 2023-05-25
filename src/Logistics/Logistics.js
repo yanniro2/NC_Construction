@@ -4,11 +4,13 @@ import EditLogistics from '../Logistics/EditLogistics'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
+import MakeSure from '../Components/MakeSure';
 function Logistics({ id, vno, vid, vtype, completed })
 {
 
     const [checked, setChecked] = useState(completed)
     const [open, setOpen] = useState({ edit: false, view: false })
+    const [popup, setPopup] = useState(null);
 
     const handleClose = () =>
     {
@@ -36,6 +38,11 @@ function Logistics({ id, vno, vid, vtype, completed })
         } catch (err) {
             alert(err)
         }
+    }
+
+    const handlePopup = () =>
+    {
+        setPopup(!popup)
     }
 
     return (
@@ -74,7 +81,7 @@ function Logistics({ id, vno, vid, vtype, completed })
                             onClick={() => setOpen({ ...open, edit: true })}>
                             Edit
                         </button>
-                        <button className='btn-1 bg-yellow text-black' onClick={handleDelete}>Delete</button>
+                        <button className='btn-1 bg-yellow text-black' onClick={handlePopup}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -104,6 +111,7 @@ function Logistics({ id, vno, vid, vtype, completed })
             }
 
             {/* </div > */}
+            {popup && <MakeSure handleDelete={handleDelete} handlePopup={handlePopup} />}
         </div >
     )
 }

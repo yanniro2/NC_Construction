@@ -1,6 +1,8 @@
-import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import login_img from "../Img/login.jpg";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { auth } from "../firebase";
 function LoginPage()
 {
     const [email, setEmail] = useState('');
@@ -11,22 +13,25 @@ function LoginPage()
     const handleSubmit = async (event) =>
     {
         event.preventDefault();
+        signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) =>
+            {
+                console.log(userCredential);
+                // setError("Login Success");
+                alert("Login Successfully ✔")
+                navigate("/");
 
-        // TODO: Implement login logic here
-        const response = await fetch('/api/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password }),
-        });
-
-        if (response.ok) {
-            const data = await response.json();
-            localStorage.setItem('token', data.token);
-            navigate('/');
-        } else {
-            setError('Invalid email or password');
-        }
+            })
+            .catch((error) =>
+            {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(error);
+                setError(errorCode, errorMessage);
+            });
     };
+
+
 
     return (
         <div className='w-full h-screen pt-[6rem] px-5 pb-2 flex items-center justify-center font-open'>
@@ -38,7 +43,8 @@ function LoginPage()
                 <div className='w-1/2 h-full flex flex-col  p-5 gap-5 justify-center'>
                     <form onSubmit={handleSubmit} className='flex flex-col gap-5'>
                         <h1 className='text-[2rem]  font-popins font-lg '>Login</h1>
-                        {error && <p>{error}</p>}
+                        <div className=' capitalize leading-4 text-[red] font-popins font-md'>{error && <p>{error}</p>}</div>
+
                         <div className='flex flex-col font-md gap-2'>
                             <label htmlFor="email" className='text-[18px] font-lg'>Email:</label>
                             <input

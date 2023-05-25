@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from '../firebase'
 
+
 function LogisticsPage()
 {
     const [openAddModal, setOpenAddModal] = useState(false)

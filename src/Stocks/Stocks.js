@@ -4,11 +4,13 @@ import EditStocks from '../Stocks/EditStocks'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
+import MakeSure from '../Components/MakeSure';
 function Stocks({ id, item, icode, completed })
 {
 
     const [checked, setChecked] = useState(completed)
     const [open, setOpen] = useState({ edit: false, view: false })
+    const [popup, setPopup] = useState(null);
 
     const handleClose = () =>
     {
@@ -30,12 +32,17 @@ function Stocks({ id, item, icode, completed })
     /* function to delete a document from firstore */
     const handleDelete = async () =>
     {
-        const taskDocRef = doc(db, 'stock', id)
+        const taskDocRef = doc(db, 'stocks', id)
         try {
             await deleteDoc(taskDocRef)
         } catch (err) {
             alert(err)
         }
+    }
+
+    const handlePopup = () =>
+    {
+        setPopup(!popup)
     }
 
     return (
@@ -76,7 +83,7 @@ function Stocks({ id, item, icode, completed })
                             onClick={() => setOpen({ ...open, edit: true })}>
                             Edit
                         </button>
-                        <button className='btn-1 bg-yellow text-black' onClick={handleDelete}>Delete</button>
+                        <button className='btn-1 bg-yellow text-black' onClick={handlePopup}>Delete</button>
                     </div>
                 </div>
             </div>
@@ -104,6 +111,7 @@ function Stocks({ id, item, icode, completed })
             }
 
             {/* </div > */}
+            {popup && <MakeSure handleDelete={handleDelete} handlePopup={handlePopup} />}
         </div >
     )
 }

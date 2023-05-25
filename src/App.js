@@ -10,8 +10,43 @@ import Payment from "./Pages/Payment";
 import Reciept from "./Pages/Reciept";
 import Stock from "./Pages/StockPage"
 import Task from "./Pages/TaskManager"
+
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import { useEffect, useState } from "react";
+import { auth } from "./firebase";
+import { HiArrowCircleDown } from "react-icons/hi"
 const App = () =>
 {
+  const [authUser, setAuthUser] = useState(null);
+
+  useEffect(() =>
+  {
+    const listen = onAuthStateChanged(auth, (user) =>
+    {
+      if (user) {
+        setAuthUser(user);
+      } else {
+        setAuthUser(null);
+      }
+    });
+
+    return () =>
+    {
+      listen();
+    };
+  }, []);
+
+  const userSignOut = (e) =>
+  {
+
+    signOut(auth)
+      .then(() =>
+      {
+        console.log("sign out successful");
+        window.location.reload();
+      })
+      .catch((error) => console.log(error));
+  };
   return (
     <Router>
       <div >
@@ -44,11 +79,19 @@ const App = () =>
             </li>
           </ul>
 
-          <div className="flex gap-5 font-xl items-center">
+          {authUser ? (
+            <div className="font-lg cursor-pointer relative bg-white group shadow-none  ">
+              <p className="flex items-center gap-1">{authUser.email} <HiArrowCircleDown /></p>
+
+              <div className="absolute z-[9999] top-[1.5rem] right-0 ">
+                <button className="items-center justify-center w-full hidden hover:block group-hover:block bg-white px-2 py-1 rounded-full btn text-dark-blue text-[1rem]" onClick={userSignOut}>Sign out</button>
+              </div>
+            </div>
+          ) : (<div className="flex gap-5 font-xl items-center">
             <Link to="/register"  >Register</Link>
             <Link to="/login" className=" border-[1px] rounded px-5 py-3  shadow-md">Login</Link>
+          </div>)}
 
-          </div>
         </nav>
 
         <Routes>

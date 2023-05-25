@@ -1,27 +1,36 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Register_img from "../Img/register.jpg"
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import React, { useState } from "react";
+import { auth } from "../firebase";
 const RegisterPage = () =>
 {
-    const [formData, setFormData] = useState({
-        username: "",
-        email: "",
-        password: "",
-        confirmPassword: "",
-    });
 
-    const handleChange = (e) =>
-    {
-        setFormData((prevFormData) => ({
-            ...prevFormData,
-            [e.target.name]: e.target.value,
-        }));
-    };
+    const [email, setEmail] = useState('');
+    const [username, setUsrname] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
     const handleSubmit = (e) =>
     {
         e.preventDefault();
-        // TODO: Add form submission logic here
+        createUserWithEmailAndPassword(auth, email, password, username)
+            .then((userCredential) =>
+            {
+                console.log(userCredential);
+                setError("ADD Scuessfully");
+                navigate("/")
+
+            })
+            .catch((error) =>
+            {
+                console.log(error);
+                setError(error);
+            });
+
+        // console.log(username, email, password, confirmPassword);
     };
 
     return (
@@ -40,8 +49,8 @@ const RegisterPage = () =>
                             <input
                                 type="text"
                                 name="username"
-                                value={formData.username}
-                                onChange={handleChange}
+                                value={username}
+                                onChange={(event) => setUsrname(event.target.value)}
                                 required
                                 className='border-[2px] rounded-2xl p-2 border-light-gray outline-none'
                             />
@@ -55,8 +64,8 @@ const RegisterPage = () =>
                             <input
                                 type="email"
                                 name="email"
-                                value={formData.email}
-                                onChange={handleChange}
+                                value={email}
+                                onChange={(event) => setEmail(event.target.value)}
                                 required
                                 className='border-[2px] rounded-2xl p-2 border-light-gray outline-none'
                             />
@@ -70,8 +79,8 @@ const RegisterPage = () =>
                             <input
                                 type="password"
                                 name="password"
-                                value={formData.password}
-                                onChange={handleChange}
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
                                 required
                                 className='border-[2px] rounded-2xl p-2 border-light-gray outline-none'
                             />
@@ -85,12 +94,13 @@ const RegisterPage = () =>
                             <input
                                 type="password"
                                 name="confirmPassword"
-                                value={formData.confirmPassword}
-                                onChange={handleChange}
+                                value={confirmPassword}
+                                onChange={(event) => setConfirmPassword(event.target.value)}
                                 required
                                 className='border-[2px] rounded-2xl p-2 border-light-gray outline-none'
                             />
                         </div>
+                        <div className=" text-[2.5rem] text-[red]">{error}</div>
 
                         <button type="submit" className=' bg-yellow p-2 rounded-full font-xl text-[1.2rem] w-full '>Register</button>
                     </form>
