@@ -25,4 +25,8 @@
     .label {
         @apply text-[1.2rem] font-xl capitalize;
     }
+
+    .h2 {
+        @apply text-[1.5rem] font-lg uppercase;
+    }
 }
