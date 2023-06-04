@@ -1,3 +1,6 @@
+## View Online
+https://yanniro2.github.io/NC_Construction
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
