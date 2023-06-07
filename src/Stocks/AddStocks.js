@@ -7,8 +7,9 @@ import { useState } from 'react'
 
 function AddStocks({ onClose, open })
 {
-  const [item, setItem] = useState('')
-  const [icode, setIcode] = useState('')
+  const [name, setName] = useState('')
+  const [price, setPrice] = useState('')
+  const [img, setImg] = useState('')
 
 
   /* function to add new task to firestore */
@@ -17,8 +18,9 @@ function AddStocks({ onClose, open })
     e.preventDefault()
     try {
       await addDoc(collection(db, 'stocks'), {
-        item: item,
-        icode: icode,
+        name: name,
+        price: price,
+        img: img,
         completed: false,
         created: Timestamp.now()
       })
@@ -33,19 +35,28 @@ function AddStocks({ onClose, open })
         <form name='addTask' onSubmit={handleSubmit} className="form ">
           <input
             type='text'
-            name='item'
-            onChange={(e) => setItem(e.target.value)}
-            value={item}
-            placeholder='Enter Items'
+            name='name'
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            placeholder='Enter Name'
             className='input' />
 
           <input
             type="text"
-            name="icode"
-            onChange={(e) => setIcode(e.target.value)}
-            placeholder='Enter Item Code'
-            value={icode}
+            name="price"
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder='Enter Price'
+            value={price}
             className='input' />
+
+          <input
+            type="text"
+            name="img"
+            onChange={(e) => setImg(e.target.value)}
+            placeholder='Enter Img URL'
+            value={img}
+            className='input' />
+
 
           <div className='flex items-center justify-center gap-6'>
             <button className='btn' onClick={onClose} type="reset">Cancel</button>

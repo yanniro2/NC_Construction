@@ -5,7 +5,7 @@ import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
 import { RiUser3Fill } from "react-icons/ri"
 import MakeSure from '../Components/MakeSure';
-function Logistics({ id, vno, vid, vtype, completed })
+function Logistics({ id, vno, vid, vtype, completed, vCategory, vImg, price })
 {
 
     const [checked, setChecked] = useState(completed)
@@ -91,7 +91,10 @@ function Logistics({ id, vno, vid, vtype, completed })
                     onClose={handleClose}
                     vno={vno}
                     vid={vid}
+                    vImg={vImg}
                     vtype={vtype}
+                    price={price}
+                    vCategory={vCategory}
                     open={open.view}
 
                 />
@@ -104,6 +107,9 @@ function Logistics({ id, vno, vid, vtype, completed })
                     toEditvno={vno}
                     toEditvid={vid}
                     toEditvtype={vtype}
+                    toEditvImg={vImg}
+                    toEditvCategory={vCategory}
+                    toEditPrice={price}
                     open={open.edit}
                     id={id}
 

@@ -3,12 +3,15 @@ import { useState } from 'react'
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 
-function AddLogistics({ open, onClose, id, toEditvno, toEditvid, toEditvtype })
+function AddLogistics({ open, onClose, id, toEditvno, toEditvid, toEditvtype, toEditvImg, toEditvCategory, toEditPrice })
 {
 
   const [vno, setVno] = useState(toEditvno)
   const [vid, setVid] = useState(toEditvid)
   const [vtype, setType] = useState(toEditvtype)
+  const [vImg, setVImg] = useState(toEditvImg)
+  const [price, setPrice] = useState(toEditPrice)
+  const [vCategory, setVCategory] = useState(toEditvCategory)
 
 
   /* function to update document in firestore */
@@ -20,6 +23,9 @@ function AddLogistics({ open, onClose, id, toEditvno, toEditvid, toEditvtype })
       await updateDoc(taskDocRef, {
         vno: vno,
         vid: vid,
+        vImg: vImg,
+        price: price,
+        vCategory: vCategory,
         vtype: vtype,
       })
       onClose()
@@ -51,6 +57,27 @@ function AddLogistics({ open, onClose, id, toEditvno, toEditvid, toEditvtype })
             name='vtype'
             onChange={(e) => setType(e.target.value)}
             value={vtype} />
+
+          <input
+            className='input'
+            type='text'
+            name='vImg'
+            onChange={(e) => setVImg(e.target.value)}
+            value={vImg} />
+
+          <input
+            className='input'
+            type='text'
+            name='vCategory'
+            onChange={(e) => setVCategory(e.target.value)}
+            value={vCategory} />
+
+          <input
+            className='input'
+            type='text'
+            name='price'
+            onChange={(e) => setPrice(e.target.value)}
+            value={price} />
 
           <div className='flex items-center justify-center gap-6'>
             <button className='btn' type="reset" onClick={onClose}>Cancel</button>

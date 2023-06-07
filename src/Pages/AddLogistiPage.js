@@ -1,12 +1,13 @@
+// JavaScript
 
-
-import Task from '../Stocks/Stocks'
-import AddTask from '../Stocks/AddStocks'
+import Task from '../Logistics/Logistics'
+import AddTask from '../Logistics/AddLogistics'
 import { useState, useEffect } from 'react'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from '../firebase'
 
-function AddStockpage({ handleView })
+
+function AddLogistiPage({ handleView })
 {
     const [openAddModal, setOpenAddModal] = useState(false)
     const [tasks, setTasks] = useState([])
@@ -14,7 +15,7 @@ function AddStockpage({ handleView })
     /* function to get all tasks from firestore in realtime */
     useEffect(() =>
     {
-        const q = query(collection(db, 'stocks'), orderBy('created', 'desc'))
+        const q = query(collection(db, 'Logistics'), orderBy('created', 'desc'))
         onSnapshot(q, (querySnapshot) =>
         {
             setTasks(querySnapshot.docs.map(doc => ({
@@ -28,11 +29,10 @@ function AddStockpage({ handleView })
         <div className='w-full h-full py-[6rem] px-5'>
             <button className='btn' onClick={handleView}>Back View List</button>
             <div className='text-center text-[1.5rem] font-xl font-open uppercase p-5 text-dark-blue flex justify-between w-full'>
-
-                <header className='text-[2rem] font-xl'>Stocks </header>
+                <header className='text-[2rem] font-xl'>Logistics</header>
                 <button className='btn bg-dark-blue text-white'
                     onClick={() => setOpenAddModal(true)}>
-                    Add Stocks +
+                    Add Logistics +
                 </button>
             </div>
 
@@ -44,19 +44,18 @@ function AddStockpage({ handleView })
                             id={task.id}
                             key={task.id}
                             completed={task.data.completed}
-                            price={task.data.price}
-                            name={task.data.name}
-                            img={task.data.img}
+                            vno={task.data.vno}
+                            vid={task.data.vid}
+                            vtype={task.data.vtype}
                         />
                     ))}
                 </div>
             </div>
-            {
-                openAddModal &&
+            {openAddModal &&
                 <AddTask onClose={() => setOpenAddModal(false)} open={openAddModal} />
             }
-        </div >
+        </div>
     )
 }
 
-export default AddStockpage;
+export default AddLogistiPage;

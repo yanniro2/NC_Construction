@@ -9,7 +9,7 @@ function CategoryPage({ handleView })
 
     useEffect(() =>
     {
-        const q = query(collection(db, 'stocks'), orderBy('created', 'desc'))
+        const q = query(collection(db, 'Logistics'), orderBy('created', 'desc'))
         onSnapshot(q, (querySnapshot) =>
         {
             setTasks(querySnapshot.docs.map(doc => ({
@@ -45,24 +45,21 @@ function CategoryPage({ handleView })
     {
         const totalPrice = items.reduce((total, item) => total + Number(item.data.price), 0);
         setTotalPrice(totalPrice);
-        // const totalPrice = items.reduce((total, item) => total  item.data.price, total);
-
-        // setTotalPrice(totalPrice);
     };
 
     return (
         <div className='w-full h-full  px-5 flex gap-5'>
             <div className='w-full h-full'>
-                <h2 className='h2 py-5  w-full justify-between flex items-center '>Stock Items
+                <h2 className='h2 py-5  w-full justify-between flex items-center '>Logistics
 
                     <button className='btn' onClick={handleView}>Add/Edit</button></h2>
 
                 <div className='w-full h-full flex flex-wrap gap-5'>
                     {tasks.map((product) => (
                         <div key={product.id} className='w-[15rem] h-[15rem]  border-2 border-light-blue p-5 rounded shadow flex justify-between flex-col relative'>
-                            <img src={product.data.img} alt="img" className='w-full h-full absolute top-0 left-0 bottom-0 right-0 object-cover z-[50]' />
+                            <img src={product.data.vImg} alt="img" className='w-full h-full absolute top-0 left-0 bottom-0 right-0 object-cover z-[50]' />
                             <div className='flex justify-between z-[100] p-1 bg-light-gray text-white rounded'>
-                                <h1 className=' font-open font-lg'>{product.data.name}</h1>
+                                <h1 className=' font-open font-lg'>{product.data.vtype}</h1>
                                 <p className=' font-popins text-[1.2rem]'>${product.data.price}</p>
                             </div>
 
@@ -79,7 +76,7 @@ function CategoryPage({ handleView })
                         {selectedItems.map((item) => (
                             <div key={item.id} className=' bg-light-yellow p-3 rounded flex justify-between items-center'>
                                 <div className='flex items-center gap-10'>
-                                    <h3 className='h2 text-[1rem]'>{item.data.name}</h3>
+                                    <h3 className='h2 text-[1rem]'>{item.data.vtype}</h3>
                                     <h2 className='py-3 font-popins font-xl'>{item.data.price}$</h2>
 
                                 </div>

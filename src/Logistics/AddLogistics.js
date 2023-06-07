@@ -9,7 +9,10 @@ function AddLogistics({ onClose, open })
 {
   const [vno, setVno] = useState('')
   const [vid, setVid] = useState('')
-  const [vtype, setType] = useState('')
+  const [vtype, setVype] = useState('')
+  const [vImg, setVImg] = useState('')
+  const [price, setPrice] = useState('')
+  const [vCategory, setVCategory] = useState('')
 
 
   /* function to add new task to firestore */
@@ -21,6 +24,9 @@ function AddLogistics({ onClose, open })
         vno: vno,
         vid: vid,
         vtype: vtype,
+        vImg: vImg,
+        price: price,
+        vCategory: vCategory,
         completed: false,
         created: Timestamp.now()
       })
@@ -52,9 +58,33 @@ function AddLogistics({ onClose, open })
           <input
             type="text"
             name="vtype"
-            onChange={(e) => setType(e.target.value)}
+            onChange={(e) => setVype(e.target.value)}
             placeholder='Enter Vechile Type'
             value={vtype}
+            className='input' />
+
+          <input
+            type="text"
+            name="vImg"
+            onChange={(e) => setVImg(e.target.value)}
+            placeholder='Enter Vechile Img'
+            value={vImg}
+            className='input' />
+
+          <input
+            type="text"
+            name="vCategory"
+            onChange={(e) => setVCategory(e.target.value)}
+            placeholder='Enter Vechile Category'
+            value={vCategory}
+            className='input' />
+
+          <input
+            type="text"
+            name="price"
+            onChange={(e) => setPrice(e.target.value)}
+            placeholder='Enter Vechile Price'
+            value={price}
             className='input' />
 
           <div className='flex items-center justify-center gap-6'>

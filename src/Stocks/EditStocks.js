@@ -3,11 +3,12 @@ import { useState } from 'react'
 import { doc, updateDoc } from "firebase/firestore";
 import { db } from '../firebase'
 
-function EditStocks({ open, onClose, id, toEdititem, toEditicode })
+function EditStocks({ open, onClose, id, toEditprice, toEditimg, toEditiname })
 {
 
-  const [item, setItem] = useState(toEdititem)
-  const [icode, setIcode] = useState(toEditicode)
+  const [name, setName] = useState(toEditiname)
+  const [price, setPrice] = useState(toEditprice)
+  const [img, setImg] = useState(toEditimg)
 
 
   /* function to update document in firestore */
@@ -17,8 +18,9 @@ function EditStocks({ open, onClose, id, toEdititem, toEditicode })
     const taskDocRef = doc(db, 'stocks', id)
     try {
       await updateDoc(taskDocRef, {
-        item: item,
-        icode: icode,
+        name: name,
+        price: price,
+        img: img,
       })
       onClose()
     } catch (err) {
@@ -28,20 +30,41 @@ function EditStocks({ open, onClose, id, toEdititem, toEditicode })
   return (
     <div className='w-full h-ful pt-[10rem] px-5 fixed z-[1000] top-0 left-0 right-0 bottom-0  backdrop-blur-md py-5 flex justify-center '>
       <Modal modalLable='Stock' onClose={onClose} open={open}>
-        <form className='form' name='updateCustomer' onSubmit={handleUpdate}>
-          <input
-            className='input'
-            type='text'
-            name='item'
-            onChange={(e) => setItem(e.target.value)}
-            value={item} />
+        <form className='form w-full flex-col justify-evenly' name='updateCustomer' onSubmit={handleUpdate} >
+          <div className="flex items-center justify-center gap-6">
+            <label htmlFor="name" className=" font-open  font-lg">Name</label>
+            <input
+              className='input'
+              type='text'
+              name='name'
+              onChange={(e) => setName(e.target.value)}
+              placeholder='Enter Name'
+              value={name} />
+          </div>
 
-          <input
-            className='input'
-            type='text'
-            name='icode'
-            onChange={(e) => setIcode(e.target.value)}
-            value={icode} />
+
+
+          <div className="flex items-center justify-center gap-6">
+            <label htmlFor="name" className=" font-open  font-lg">price</label>
+            <input
+              className='input'
+              type='text'
+              name='price'
+              onChange={(e) => setPrice(e.target.value)}
+              placeholder='Enter Price'
+              value={price} />
+          </div>
+
+          <div className="flex items-center justify-center gap-6">
+            <label htmlFor="name" className=" font-open  font-lg">URL</label>
+            <input
+              className='input'
+              type='text'
+              name='img'
+              onChange={(e) => setImg(e.target.value)}
+              placeholder='Enter URL'
+              value={img} />
+          </div>
 
           <div className='flex items-center justify-center gap-6'>
             <button className='btn' type="reset" onClick={onClose}>Cancel</button>

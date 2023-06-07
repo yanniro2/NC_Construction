@@ -1,5 +1,5 @@
 
-function Modal({ open, modalLable, children, custom_modal, onClose })
+function Modal({ open, modalLable, children, onClose })
 {
 
   const handleClose = (e) =>
