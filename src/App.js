@@ -17,6 +17,17 @@ import { auth } from "./firebase";
 import { HiArrowCircleDown } from "react-icons/hi"
 const App = () =>
 {
+
+  // Stock
+  const [stocksPayment, setStocksPayment] = useState(0);
+  const [selectedItemsStock, setSelectedItemsStock] = useState([]);
+  const [totalPriceStock, setTotalPriceStock] = useState(0);
+
+  //Logistics
+  const [logisticPayment, setLogisticPayment] = useState(0);
+  const [selectedItemsLogistic, setSelectedItemsLogistic] = useState([]);
+  const [totalPriceLogistic, setTotalPriceLogistic] = useState(0);
+  //App
   const [authUser, setAuthUser] = useState(null);
 
   useEffect(() =>
@@ -98,9 +109,19 @@ const App = () =>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/stocks" element={<Stock />} />
-          <Route path="/logistics" element={<Logistics />} />
-          <Route path="/payment" element={<Payment />} />
+
+          <Route path="/stocks" element={<Stock setStocksPayment={setStocksPayment} selectedItemsStock={selectedItemsStock} setSelectedItemsStock={setSelectedItemsStock} totalPriceStock={totalPriceStock} setTotalPriceStock={setTotalPriceStock} />} />
+
+
+          <Route path="/logistics" element={<Logistics setLogisticPayment={setLogisticPayment} selectedItemsLogistic={selectedItemsLogistic}
+            setSelectedItemsLogistic={setSelectedItemsLogistic}
+            totalPriceLogistic={totalPriceLogistic}
+            setTotalPriceLogistic={setTotalPriceLogistic}
+
+          />} />
+
+
+          <Route path="/payment" element={<Payment stocksPayment={stocksPayment} logisticPayment={logisticPayment} />} />
           <Route path="/reciept" element={<Reciept />} />
           <Route path="/employee" element={<Employee />} />
           <Route path="/customer" element={<Customer />} />

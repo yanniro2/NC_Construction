@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
-function CategoryPage({ handleView })
+import { Link } from "react-router-dom"
+function CategoryPage({ handleView, setLogisticPayment, selectedItemsLogistic, setSelectedItemsLogistic, totalPriceLogistic, setTotalPriceLogistic })
 {
     const [tasks, setTasks] = useState([])
     useEffect(() =>
@@ -18,31 +19,32 @@ function CategoryPage({ handleView })
     }, [])
 
 
+    // const [selectedItemsLogistic, setSelectedItemsLogistic] = useState([]);
+    // const [totalPriceLogistic, setTotalPriceLogistic] = useState(0);
 
-    const [selectedItems, setSelectedItems] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
 
     // Function to handle adding a product
     const handleAddProduct = (item) =>
     {
-        const updatedItems = [...selectedItems, item];
-        setSelectedItems(updatedItems);
-        calculateTotalPrice(updatedItems);
+        const updatedItems = [...selectedItemsLogistic, item];
+        setSelectedItemsLogistic(updatedItems);
+        calculateTotalPriceLogistic(updatedItems);
     };
 
     // Function to handle removing a product
     const handleRemoveProduct = (item) =>
     {
-        const updatedItems = selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
-        setSelectedItems(updatedItems);
-        calculateTotalPrice(updatedItems);
+        const updatedItems = selectedItemsLogistic.filter((selectedItem) => selectedItem.id !== item.id);
+        setSelectedItemsLogistic(updatedItems);
+        calculateTotalPriceLogistic(updatedItems);
     };
 
     // Function to calculate the total price
-    const calculateTotalPrice = (items) =>
+    const calculateTotalPriceLogistic = (items) =>
     {
-        const totalPrice = items.reduce((total, item) => total + Number(item.data.price), 0);
-        setTotalPrice(totalPrice);
+        const totalPriceLogistic = items.reduce((total, item) => total + Number(item.data.price), 0);
+        setTotalPriceLogistic(totalPriceLogistic);
+        setLogisticPayment(totalPriceLogistic);
     };
 
     return (
@@ -67,11 +69,11 @@ function CategoryPage({ handleView })
                 </div>
             </div>
 
-            {totalPrice !== 0 ? (<div className=' flex-col bg-white drop-shadow p-5 rounded-xl mt-5  w-auto h-max'>
+            {totalPriceLogistic !== 0 ? (<div className=' flex-col bg-white drop-shadow p-5 rounded-xl mt-5  w-auto h-max'>
                 <h2 className='h2 w-full items-center text-center font-popins max-w-max pb-2'>Cart</h2>
-                {selectedItems.length > 0 ? (
+                {selectedItemsLogistic.length > 0 ? (
                     <div className='w-full flex flex-col gap-3'>
-                        {selectedItems.map((item) => (
+                        {selectedItemsLogistic.map((item) => (
                             <div key={item.id} className=' bg-light-yellow p-3 rounded flex justify-between items-center'>
                                 <div className='flex items-center gap-10'>
                                     <h3 className='h2 text-[1rem]'>{item.data.vtype}</h3>
@@ -93,11 +95,11 @@ function CategoryPage({ handleView })
                     <div className='flex gap-3'>
                         <h2 className='py-3 font-popins font-xl'>Total Price: </h2>
 
-                        <p className='py-3 font-popins font-xl'>${totalPrice}</p>
+                        <p className='py-3 font-popins font-xl'>${totalPriceLogistic}</p>
                     </div>
 
 
-                    <button className='btn m-1 py-1 px-5 flex items-center text-[1rem]'>Payment</button>
+                    <Link to="/payment" className='btn m-1 py-1 px-5 flex items-center text-[1rem]' >Payment</Link>
                 </div>
 
             </div>) : (<></>)}

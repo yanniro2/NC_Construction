@@ -2,14 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
-import Payment from "../Pages/Payment";
-import { useNavigate } from 'react-router-dom';
-function CategoryPage({ handleView })
+import { Link } from "react-router-dom"
+function CategoryPage({ handleView, setStocksPayment, selectedItemsStock, setSelectedItemsStock, totalPriceStock, setTotalPriceStock })
 {
-    const [payment, setPayment] = useState("");
 
     const [tasks, setTasks] = useState([])
-    const history = useNavigate();
+
 
     useEffect(() =>
     {
@@ -25,50 +23,42 @@ function CategoryPage({ handleView })
 
 
 
-    const [selectedItems, setSelectedItems] = useState([]);
-    const [totalPrice, setTotalPrice] = useState(0);
+
+
+    // const [selectedItemsStock, setSelectedItemsStock] = useState([]);
+    // const [totalPriceStock, setTotalPriceStock] = useState(0);
 
     // Function to handle adding a product
     const handleAddProduct = (item) =>
     {
-        const updatedItems = [...selectedItems, item];
-        setSelectedItems(updatedItems);
-        calculateTotalPrice(updatedItems);
+        const updatedItems = [...selectedItemsStock, item];
+        setSelectedItemsStock(updatedItems);
+        calculateTotalPriceStock(updatedItems);
 
     };
 
     // Function to handle removing a product
     const handleRemoveProduct = (item) =>
     {
-        const updatedItems = selectedItems.filter((selectedItem) => selectedItem.id !== item.id);
-        setSelectedItems(updatedItems);
-        calculateTotalPrice(updatedItems);
+        const updatedItems = selectedItemsStock.filter((selectedItem) => selectedItem.id !== item.id);
+        setSelectedItemsStock(updatedItems);
+        calculateTotalPriceStock(updatedItems);
     };
 
     // Function to calculate the total price
-    const calculateTotalPrice = (items) =>
+    const calculateTotalPriceStock = (items) =>
     {
-        const totalPrice = items.reduce((total, item) => total + Number(item.data.price), 0);
-        setTotalPrice(totalPrice);
-        setPayment(totalPrice);
-        // const totalPrice = items.reduce((total, item) => total  item.data.price, total);
+        const totalPriceStock = items.reduce((total, item) => total + Number(item.data.price), 0);
+        setTotalPriceStock(totalPriceStock);
+        setStocksPayment(totalPriceStock);
+        // const totalPriceStock = items.reduce((total, item) => total  item.data.price, total);
 
-        // setTotalPrice(totalPrice);
+        // setTotalPriceStock(totalPriceStock);
+
+
     };
 
-    const clickPayment = () =>
-    {
 
-        const details = {
-            name: 'John Doe',
-            price: 25,
-        };
-
-        history.push({
-            pathname: '/payment',
-            state: details,
-        });
-    }
 
 
     return (
@@ -93,11 +83,11 @@ function CategoryPage({ handleView })
                 </div>
             </div>
 
-            {totalPrice !== 0 ? (<div className=' flex-col bg-white drop-shadow p-5 rounded-xl mt-5  w-auto h-max'>
+            {totalPriceStock !== 0 ? (<div className=' flex-col bg-white drop-shadow p-5 rounded-xl mt-5  w-auto h-max'>
                 <h2 className='h2 w-full items-center text-center font-popins max-w-max pb-2'>Cart</h2>
-                {selectedItems.length > 0 ? (
+                {selectedItemsStock.length > 0 ? (
                     <div className='w-full flex flex-col gap-3'>
-                        {selectedItems.map((item) => (
+                        {selectedItemsStock.map((item) => (
                             <div key={item.id} className=' bg-light-yellow p-3 rounded flex justify-between items-center'>
                                 <div className='flex items-center gap-10'>
                                     <h3 className='h2 text-[1rem]'>{item.data.name}</h3>
@@ -119,11 +109,11 @@ function CategoryPage({ handleView })
                     <div className='flex gap-3'>
                         <h2 className='py-3 font-popins font-xl'>Total Price: </h2>
 
-                        <p className='py-3 font-popins font-xl'>${totalPrice}</p>
+                        <p className='py-3 font-popins font-xl'>${totalPriceStock}</p>
                     </div>
 
 
-                    <button className='btn m-1 py-1 px-5 flex items-center text-[1rem]' onClick={clickPayment}>Payment</button>
+                    <Link to="/payment" className='btn m-1 py-1 px-5 flex items-center text-[1rem]' >Payment</Link>
                 </div>
 
             </div>) : (<></>)}

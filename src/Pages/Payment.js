@@ -1,8 +1,11 @@
 import React from 'react'
-
-function Payment(props)
+import { useLocation } from 'react-router-dom';
+function Payment({ stocksPayment, logisticPayment })
 {
-    const { price } = props.location.state;
+    const total = stocksPayment + logisticPayment;
+    const location = useLocation();
+    const details = location.state?.details;
+    // const { price } = props.location.state;
 
     return (
         <div className='w-full h-full py-[6rem] px-5 flex justify-center flex-col'>
@@ -10,7 +13,7 @@ function Payment(props)
                 <header className='text-[2rem] font-xl'>Payment</header>
                 <div className='btn bg-blue text-white capitalize'
                 >
-                    total {price}$
+                    {/* total {price}$ */} total  {total}$
                 </div>
             </div>
             <div className='w-full flex justify-center'>
