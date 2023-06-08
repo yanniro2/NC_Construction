@@ -1,14 +1,16 @@
 import React from 'react'
 
-function Payment()
+function Payment(props)
 {
+    const { price } = props.location.state;
+
     return (
         <div className='w-full h-full py-[6rem] px-5 flex justify-center flex-col'>
             <div className='text-center text-[1.5rem] font-xl font-open uppercase p-5 text-dark-blue flex justify-between w-full'>
                 <header className='text-[2rem] font-xl'>Payment</header>
                 <div className='btn bg-blue text-white capitalize'
                 >
-                    total 250$
+                    total {price}$
                 </div>
             </div>
             <div className='w-full flex justify-center'>

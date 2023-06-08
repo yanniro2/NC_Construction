@@ -4,9 +4,7 @@ import { db } from '../firebase'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 function CategoryPage({ handleView })
 {
-
     const [tasks, setTasks] = useState([])
-
     useEffect(() =>
     {
         const q = query(collection(db, 'Logistics'), orderBy('created', 'desc'))
@@ -48,7 +46,7 @@ function CategoryPage({ handleView })
     };
 
     return (
-        <div className='w-full h-full  px-5 flex gap-5'>
+        <div className='w-full h-full  px-5 flex gap-5 '>
             <div className='w-full h-full'>
                 <h2 className='h2 py-5  w-full justify-between flex items-center '>Logistics
 
@@ -58,7 +56,7 @@ function CategoryPage({ handleView })
                     {tasks.map((product) => (
                         <div key={product.id} className='w-[15rem] h-[15rem]  border-2 border-light-blue p-5 rounded shadow flex justify-between flex-col relative'>
                             <img src={product.data.vImg} alt="img" className='w-full h-full absolute top-0 left-0 bottom-0 right-0 object-cover z-[50]' />
-                            <div className='flex justify-between z-[100] p-1 bg-light-gray text-white rounded'>
+                            <div className='flex justify-between z-[100] p-2 bg-light-gray text-white rounded flex-col w-full gap-2 '>
                                 <h1 className=' font-open font-lg'>{product.data.vtype}</h1>
                                 <p className=' font-popins text-[1.2rem]'>${product.data.price}</p>
                             </div>

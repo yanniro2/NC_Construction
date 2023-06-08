@@ -26,8 +26,8 @@ function AddLogistiPage({ handleView })
     }, [])
 
     return (
-        <div className='w-full h-full py-[6rem] px-5'>
-            <button className='btn' onClick={handleView}>Back View List</button>
+        <div className='w-full h-full pb-[8rem] pt-5 px-5'>
+            <button className=' underline  text-dark-blue ' onClick={handleView}>Back View List</button>
             <div className='text-center text-[1.5rem] font-xl font-open uppercase p-5 text-dark-blue flex justify-between w-full'>
                 <header className='text-[2rem] font-xl'>Logistics</header>
                 <button className='btn bg-dark-blue text-white'
@@ -47,6 +47,7 @@ function AddLogistiPage({ handleView })
                             vno={task.data.vno}
                             vid={task.data.vid}
                             vtype={task.data.vtype}
+                            vImg={task.data.vImg}
                         />
                     ))}
                 </div>

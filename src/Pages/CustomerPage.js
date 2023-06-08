@@ -25,7 +25,7 @@ function CustomerPage()
     }, [])
 
     return (
-        <div className='w-full h-full py-[6rem] px-5'>
+        <div className='w-full h-full py-[6rem] px-5 '>
             <div className='text-center text-[1.5rem] font-xl font-open uppercase p-5 text-dark-blue flex justify-between w-full'>
                 <header className='text-[2rem] font-xl'>Customer</header>
                 <button className='btn bg-dark-blue text-white'

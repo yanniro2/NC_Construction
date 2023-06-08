@@ -2,10 +2,14 @@
 import React, { useState, useEffect } from 'react';
 import { db } from '../firebase'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
+import Payment from "../Pages/Payment";
+import { useNavigate } from 'react-router-dom';
 function CategoryPage({ handleView })
 {
+    const [payment, setPayment] = useState("");
 
     const [tasks, setTasks] = useState([])
+    const history = useNavigate();
 
     useEffect(() =>
     {
@@ -30,6 +34,7 @@ function CategoryPage({ handleView })
         const updatedItems = [...selectedItems, item];
         setSelectedItems(updatedItems);
         calculateTotalPrice(updatedItems);
+
     };
 
     // Function to handle removing a product
@@ -45,10 +50,26 @@ function CategoryPage({ handleView })
     {
         const totalPrice = items.reduce((total, item) => total + Number(item.data.price), 0);
         setTotalPrice(totalPrice);
+        setPayment(totalPrice);
         // const totalPrice = items.reduce((total, item) => total  item.data.price, total);
 
         // setTotalPrice(totalPrice);
     };
+
+    const clickPayment = () =>
+    {
+
+        const details = {
+            name: 'John Doe',
+            price: 25,
+        };
+
+        history.push({
+            pathname: '/payment',
+            state: details,
+        });
+    }
+
 
     return (
         <div className='w-full h-full  px-5 flex gap-5'>
@@ -102,7 +123,7 @@ function CategoryPage({ handleView })
                     </div>
 
 
-                    <button className='btn m-1 py-1 px-5 flex items-center text-[1rem]'>Payment</button>
+                    <button className='btn m-1 py-1 px-5 flex items-center text-[1rem]' onClick={clickPayment}>Payment</button>
                 </div>
 
             </div>) : (<></>)}

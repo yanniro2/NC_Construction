@@ -3,7 +3,6 @@ import StockList from '../Stocks/StockList'
 import EditStocks from '../Stocks/EditStocks'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
-import { RiUser3Fill } from "react-icons/ri"
 import MakeSure from '../Components/MakeSure';
 function Stocks({ id, name, price, img, completed })
 {

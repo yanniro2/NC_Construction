@@ -1,6 +1,6 @@
 import Modal from "./Modal"
 
-function LogisticsList({ onClose, open, vno, vid, vtype })
+function LogisticsList({ onClose, open, vno, vid, vtype, vImg, price })
 {
 
   return (
@@ -28,7 +28,15 @@ function LogisticsList({ onClose, open, vno, vid, vtype })
             <h2>{vtype}</h2>
           </div>
 
-
+          <div className="flex items-center gap-6">
+            <label htmlFor="" className="text-[1.2rem] font-xl capitalize">
+              Price:
+            </label>
+            <h2>{price}$</h2>
+          </div>
+          <div className="w-full rounded-md overflow-hidden ">
+            <img src={vImg} alt="img" className="w-full object-cover " />
+          </div>
         </div>
       </Modal>
     </div>

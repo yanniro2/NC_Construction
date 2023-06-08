@@ -3,7 +3,6 @@ import LogisticsList from '../Logistics/LogisticsList'
 import EditLogistics from '../Logistics/EditLogistics'
 import { doc, updateDoc, deleteDoc } from "firebase/firestore";
 import { db } from '../firebase'
-import { RiUser3Fill } from "react-icons/ri"
 import MakeSure from '../Components/MakeSure';
 function Logistics({ id, vno, vid, vtype, completed, vCategory, vImg, price })
 {
@@ -46,7 +45,8 @@ function Logistics({ id, vno, vid, vtype, completed, vCategory, vImg, price })
     }
 
     return (
-        <div className=' rounded  shadow-md border-light-blue border-[2px] flex w-full'>
+        <div className=' rounded  shadow-md border-light-blue border-[2px] flex w-[15rem] h-[15rem] relative'>
+            <img src={vImg} alt="" className='w-full h-full absolute top-0 left-0 right-0 bottom-0 object-cover z-[5]' />
             {/* <div className={`task ${checked && 'task--borderColor'}`}> */}
             {/* <div className='w-full h-full'> */}
             {/* <div>
@@ -62,15 +62,19 @@ function Logistics({ id, vno, vid, vtype, completed, vCategory, vImg, price })
                         className="checkbox-custom-label"
                         onClick={() => setChecked(!checked)} ></label>
                 </div> */}
-            <div className='flex w-full h-full flex-wrap '>
-                <div className='w-full h-full flex  justify-evenly items-center'>
+            <div className='flex w-full h-full flex-wrap z-[50] '>
+                <div className='w-full h-full flex  justify-evenly items-center flex-col text-[White] relative'>
+                    <div className='absolute top-0 bottom-0 left-0 right-0 w-full h-full'>
+                        <img src={vImg} alt="" className='w-full h-full object-cover' />
+                        <p>{vImg}</p>
+                    </div>
 
-                    <div className='flex w-1/2 flex-col gap-1' >
-                        <p className="text-[1.2rem] font-xl capitalize">Vechile No : {vno}</p>
+                    <div className='flex flex-col gap-1 bg-light-gray rounded p-5 z-[100]' >
+                        <p className="text-[1.2rem] font-xl capitalize z-[500]">Vechile No : {vno}</p>
                         <p className="text-[1.2rem] font-xl capitalize">Vechile ID: {vid}</p>
                     </div>
 
-                    <div className='flex w-1/2  justify-end gap-5 p-2' >
+                    <div className='flex  gap-5 p-2 z-[100]' >
                         <button
                             onClick={() => setOpen({ ...open, view: true })}
                             className='btn-1'>
@@ -83,6 +87,8 @@ function Logistics({ id, vno, vid, vtype, completed, vCategory, vImg, price })
                         </button>
                         <button className='btn-1 bg-yellow text-black' onClick={handlePopup}>Delete</button>
                     </div>
+
+
                 </div>
             </div>
             {
