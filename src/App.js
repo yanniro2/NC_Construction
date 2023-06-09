@@ -10,6 +10,7 @@ import Payment from "./Pages/Payment";
 import Reciept from "./Pages/Reciept";
 import Stock from "./Pages/StockPage"
 import Task from "./Pages/TaskManager"
+import Report from "./Pages/Report"
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
@@ -76,9 +77,9 @@ const App = () =>
             <li>
               <Link to="/payment">Payment</Link>
             </li>
-            <li>
+            {/* <li>
               <Link to="/reciept">Reciept</Link>
-            </li>
+            </li> */}
             <li>
               <Link to="/employee">Employee</Link>
             </li>
@@ -86,8 +87,11 @@ const App = () =>
               <Link to="/customer">Customer</Link>
             </li>
             <li>
-              <Link to="/task">Task</Link>
+              <Link to="/task">Ongoing Project</Link>
             </li>
+            {/* <li>
+              <Link to="/report">Report</Link>
+            </li> */}
           </ul>
 
           {authUser ? (
@@ -126,6 +130,7 @@ const App = () =>
           <Route path="/employee" element={<Employee />} />
           <Route path="/customer" element={<Customer />} />
           <Route path="/task" element={<Task />} />
+          <Route path="/report" element={<Report />} />
         </Routes>
       </div>
     </Router>

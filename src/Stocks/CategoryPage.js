@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { db } from '../firebase'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { Link } from "react-router-dom"
+import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer';
 function CategoryPage({ handleView, setStocksPayment, selectedItemsStock, setSelectedItemsStock, totalPriceStock, setTotalPriceStock })
 {
 
@@ -58,14 +59,32 @@ function CategoryPage({ handleView, setStocksPayment, selectedItemsStock, setSel
 
     };
 
+    // Functionto Generate a Report
+    const generateReport = () =>
+    {
+        const ReportDocument = () => (
+            <Document>
+                <Page>
+                    <Text>Stocks Report</Text>
+                    {tasks.map((product) => (
+                        <Text key={product.id}>
+                            {product.data.name} - ${product.data.price}
+                        </Text>
+                    ))}
+                </Page>
+            </Document>
+        );
+
+        return <ReportDocument />;
+    };
+
 
 
 
     return (
-        <div className='w-full h-full  px-5 flex gap-5'>
+        <div className='w-full h-full  px-5 flex gap-5 flex-col '>
             <div className='w-full h-full'>
                 <h2 className='h2 py-5  w-full justify-between flex items-center '>Stock Items
-
                     <button className='btn' onClick={handleView}>Add/Edit</button></h2>
 
                 <div className='w-full h-full flex flex-wrap gap-5'>
@@ -117,6 +136,16 @@ function CategoryPage({ handleView, setStocksPayment, selectedItemsStock, setSel
                 </div>
 
             </div>) : (<></>)}
+
+            <PDFDownloadLink
+                document={generateReport()}
+                fileName="StockReport.pdf"
+                className="btn bg-dark-blue hover:bg-blue-700 text-white font-bold"
+            >
+                {({ loading }) =>
+                    loading ? 'Generating report...' : 'Download Report'
+                }
+            </PDFDownloadLink>
 
         </div>
     );
