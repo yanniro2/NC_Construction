@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react'
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore"
 import { db } from '../firebase'
 import { PDFDownloadLink, Document, Page, Text } from '@react-pdf/renderer';
+import { useLocation, Link } from 'react-router-dom';
+import { auth } from '../firebase'
 
 function CustomerPage()
 {
@@ -24,6 +26,21 @@ function CustomerPage()
             })))
         })
     }, [])
+
+    const [user, setUser] = useState(null);
+
+    useEffect(() =>
+    {
+        const unsubscribe = auth.onAuthStateChanged((user) =>
+        {
+            setUser(user);
+        });
+
+        return () =>
+        {
+            unsubscribe();
+        };
+    }, []);
 
     // Functionto Generate a Report
     const generateReport = () =>
@@ -45,7 +62,8 @@ function CustomerPage()
     };
     return (
         <div className='w-full h-full py-[6rem] px-5 flex flex-col'>
-            <div className='text-center text-[1.5rem] font-xl font-open uppercase p-5 text-dark-blue flex justify-between w-full'>
+
+            {user ? (<><div className='text-center text-[1.5rem] font-xl font-open uppercase p-5 text-dark-blue flex justify-between w-full'>
                 <header className='text-[2rem] font-xl'>Customer</header>
                 <button className='btn bg-dark-blue text-white'
                     onClick={() => setOpenAddModal(true)}>
@@ -53,37 +71,41 @@ function CustomerPage()
                 </button>
             </div>
 
-            <div className='taskManager__container p-5'>
+                <div className='taskManager__container p-5'>
 
-                <div className='flex w-full h-full flex-wrap gap-5'>
-                    {tasks.map((task) => (
-                        <Task
-                            id={task.id}
-                            key={task.id}
-                            completed={task.data.completed}
-                            title={task.data.title}
-                            description={task.data.description}
-                            cusEmail={task.data.cusEmail}
-                            cusNo={task.data.cusNo}
-                            cusID={task.data.cusID}
+                    <div className='flex w-full h-full flex-wrap gap-5'>
+                        {tasks.map((task) => (
+                            <Task
+                                id={task.id}
+                                key={task.id}
+                                completed={task.data.completed}
+                                title={task.data.title}
+                                description={task.data.description}
+                                cusEmail={task.data.cusEmail}
+                                cusNo={task.data.cusNo}
+                                cusID={task.data.cusID}
 
-                        />
-                    ))}
-                </div>
-            </div>
+                            />
+                        ))}
+                    </div>
+                    <PDFDownloadLink
+                        document={generateReport()}
+                        fileName="CustomerReport.pdf"
+                        className="btn bg-dark-blue hover:bg-blue-700 text-white font-bold"
+                    >
+                        {({ loading }) =>
+                            loading ? 'Generating report...' : 'Download Report'
+                        }
+                    </PDFDownloadLink>
+                </div></>) : (<div className='w-screen h-screen absolute flex items-center justify-center top-0 left-0 right-0 bottom-0'>
+
+                    <h1 className='h2'>You must  <Link to="/login" className='text-[red] underline'>log in</Link>  to access this content.</h1></div>)}
+
             {openAddModal &&
                 <AddTask onClose={() => setOpenAddModal(false)} open={openAddModal} />
             }
 
-            <PDFDownloadLink
-                document={generateReport()}
-                fileName="CustomerReport.pdf"
-                className="btn bg-dark-blue hover:bg-blue-700 text-white font-bold"
-            >
-                {({ loading }) =>
-                    loading ? 'Generating report...' : 'Download Report'
-                }
-            </PDFDownloadLink>
+
         </div>
     )
 }
