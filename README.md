@@ -1,6 +1,6 @@
 # Firebase CRUD and Authentication Frontend Project
 
-![Project Logo](/images/project-logo.png)
+![Project Logo](/images/sample.png)
 
 This is a frontend project that demonstrates how to create a Firebase-powered web application with CRUD (Create, Read, Update, Delete) functionality and user authentication. The project also incorporates the Tailwind CSS framework for styling.
 
@@ -38,3 +38,9 @@ Before you begin, ensure you have met the following requirements:
 
    ```bash
    git clone https://github.com/your-username/your-project.git
+
+1. **Live Preview :**
+
+   ```bash
+   https://nc-construction.vercel.app/
+
