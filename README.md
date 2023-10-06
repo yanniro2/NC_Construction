@@ -42,5 +42,5 @@ Before you begin, ensure you have met the following requirements:
 1. **Live Preview :**
 
    ```bash
-   https://nc-construction.vercel.app/
+   https://yanniro2.github.io/NC_Construction/
 
